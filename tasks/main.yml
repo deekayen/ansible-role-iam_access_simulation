@@ -1,0 +1,41 @@
+---
+
+- name: List all IAM users.
+  community.aws.iam_user_info:
+  register: user_info_result
+  tags:
+    - user
+
+- name: Print IAM user information.
+  debug:
+    var: user_info_result
+    verbosity: 2
+  tags:
+    - user
+
+- name: List all IAM roles.
+  community.aws.iam_role_info:
+  register: role_info_result
+  tags:
+    - role
+
+- name: Print IAM role information.
+  debug:
+    var: role_info_result
+    verbosity: 2
+  tags:
+    - role
+
+- name: Loop through resources to simulate user access.
+  include_tasks: "{{ role_path }}/tasks/simulate.yml"
+  loop: "{{ resources_to_test }}"
+  loop_control:
+    loop_var: resource_item
+  tags:
+    - always
+
+- name: Print similation results.
+  debug:
+    msg: "{{ output_paragraph | trim }}"
+  tags:
+    - always
