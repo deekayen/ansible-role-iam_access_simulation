@@ -41,9 +41,9 @@ The results of the simulation are printed to the console at the end of the playb
 TASK [iam_access_test : Print similation results.] *****************************
 ok: [localhost] => {
     "msg": [
-        "User deekayen allowed to s3:GetObject on arn:aws:s3:::deekayen-123456789000-secret-bucket.", 
-        "Role ec2-instances allowed to s3:GetObject on arn:aws:s3:::deekayen-123456789000-secret-bucket", 
-        "User deekayen allowed to kms:Decrypt on arn:aws:kms:us-east-1:123456789000:key/1234abab-1e2c-3a4b-9ba8-1234567890ab.", 
+        "User deekayen allowed to s3:GetObject on arn:aws:s3:::deekayen-123456789000-secret-bucket",
+        "Role ec2-instances allowed to s3:GetObject on arn:aws:s3:::deekayen-123456789000-secret-bucket",
+        "User deekayen allowed to kms:Decrypt on arn:aws:kms:us-east-1:123456789000:key/1234abab-1e2c-3a4b-9ba8-1234567890ab",
         "Role ec2-instances allowed to kms:Decrypt on arn:aws:kms:us-east-1:123456789000:key/1234abab-1e2c-3a4b-9ba8-1234567890ab"
     ]
 }
