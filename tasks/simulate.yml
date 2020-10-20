@@ -1,0 +1,54 @@
+---
+
+- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - user simulate {{ resource_item.action }}."
+  command: |
+    aws iam simulate-principal-policy \
+      --policy-source-arn {{ item.arn }} \
+      --resource-arns {{ resource_item.resource }} \
+      --action-names {{ resource_item.action }}
+  loop: "{{ user_info_result.iam_users }}"
+  changed_when: False
+  register: user_simulation_result
+  tags:
+    - user
+
+- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - print {{ resource_item.action }} simulation outcome."
+  debug:
+    var: user_simulation_result
+    verbosity: 2
+  tags:
+    - user
+
+- name: Loop through results to make an output paragraph.
+  include_tasks: "{{ role_path }}/tasks/set_user_facts.yml"
+  loop: "{{ user_simulation_result.results }}"
+  loop_control:
+    loop_var: simulation_json
+  tags:
+    - user
+
+- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - role simulate {{ resource_item.action }}."
+  command: |
+    aws iam simulate-principal-policy \
+      --policy-source-arn {{ item.arn }} \
+      --resource-arns {{ resource_item.resource }} \
+      --action-names {{ resource_item.action }}
+  loop: "{{ role_info_result.iam_roles }}"
+  changed_when: False
+  register: role_simulation_result
+  tags:
+    - role
+
+- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - print {{ resource_item.action }} simulation outcome."
+  debug:
+    var: role_simulation_result
+  tags:
+    - role
+
+- name: Loop through results to make an output paragraph.
+  include_tasks: "{{ role_path }}/tasks/set_role_facts.yml"
+  loop: "{{ role_simulation_result.results }}"
+  loop_control:
+    loop_var: simulation_json
+  tags:
+    - role
