@@ -1,7 +1,7 @@
 AWS IAM Access Simulation
 =========================
 
-![Super-Linter](https://github.com/deekayen/ansible-role-iam_access_simulation/workflows/Super-Linter/badge.svg)
+![Super-Linter](https://github.com/deekayen/ansible-role-iam_access_simulation/workflows/Super-Linter/badge.svg) [![Build Status](https://travis-ci.org/deekayen/ansible-role-iam_access_simulation.svg?branch=main)](https://travis-ci.org/deekayen/ansible-role-iam_access_simulation)
 
 Test the access of IAM users and roles performing various IAM actions against any ARN.
 
