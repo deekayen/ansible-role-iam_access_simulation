@@ -11,13 +11,13 @@ Test access of IAM users and roles using the [AWS CLI simulate principal policy]
 
 ## Role Variables
 
-```
+```yaml
 resources_to_test: []
 ```
 
 ## Example Playbook
 
-```
+```yaml
 ---
 
 - hosts: localhost
@@ -37,7 +37,7 @@ resources_to_test: []
 
 The results of the simulation are printed to the console at the end of the playbook run.
 
-```
+```shell
 TASK [iam_access_test : Print similation results.] *****************************
 ok: [localhost] => {
     "msg": [
@@ -61,7 +61,7 @@ The control machine needs boto and AWS CLI.
 
 ## Dependencies
 
-```
+```yaml
 collections:
   - community.aws
   - community.general
