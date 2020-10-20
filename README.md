@@ -52,7 +52,7 @@ ok: [localhost] => {
 [
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=327  changed=0    unreachable=0    failed=0    skipped=324  rescued=0    ignored=0   
+localhost                  : ok=327  changed=0    unreachable=0    failed=0    skipped=324  rescued=0    ignored=0
 
 Playbook run took 0 days, 0 hours, 3 minutes, 14 seconds
 ```
