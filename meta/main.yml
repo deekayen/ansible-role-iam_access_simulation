@@ -19,4 +19,8 @@ galaxy_info:
     - aws
     - iam
 
+collections:
+  - community.aws
+  - community.general
+
 dependencies: []
