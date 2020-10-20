@@ -38,7 +38,7 @@ resources_to_test: []
 The results of the simulation are printed to the console at the end of the playbook run.
 
 ```shell
-TASK [iam_access_test : Print similation results.] *****************************
+TASK [iam_access_simulation : Print similation results.] **********************
 ok: [localhost] => {
     "msg": [
         "User deekayen allowed to s3:GetObject on arn:aws:s3:::deekayen-123456789000-secret-bucket",
