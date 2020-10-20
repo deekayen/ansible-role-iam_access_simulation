@@ -9,13 +9,15 @@ This will gather all the users and roles in your AWS account, then test the prov
 
 Test access of IAM users and roles using the [AWS CLI simulate principal policy](https://docs.aws.amazon.com/cli/latest/reference/iam/simulate-principal-policy.html) feature.
 
-## Role Variables
+Role Variables
+--------------
 
 ```yaml
 resources_to_test: []
 ```
 
-## Example Playbook
+Example Playbook
+----------------
 
 ```yaml
 ---
@@ -55,11 +57,13 @@ localhost                  : ok=327  changed=0    unreachable=0    failed=0    s
 Playbook run took 0 days, 0 hours, 3 minutes, 14 seconds
 ```
 
-## Requirements
+Requirements
+------------
 
 The control machine needs boto and AWS CLI.
 
-## Dependencies
+Dependencies
+------------
 
 ```yaml
 collections:
@@ -67,6 +71,7 @@ collections:
   - community.general
 ```
 
-## License
+License
+-------
 
 BSD-3-Clause
