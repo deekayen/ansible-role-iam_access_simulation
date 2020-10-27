@@ -9,6 +9,11 @@ This will gather all the users and roles in your AWS account, then test the prov
 
 Test access of IAM users and roles using the [AWS CLI simulate principal policy](https://docs.aws.amazon.com/cli/latest/reference/iam/simulate-principal-policy.html) feature.
 
+    aws iam simulate-principal-policy \
+      --policy-source-arn <user/role arn> \
+      --resource-arns <resource arn> \
+      --action-names <action>
+
 Role Variables
 --------------
 
