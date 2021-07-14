@@ -2,6 +2,7 @@
 
 galaxy_info:
   role_name: iam_access_simulation
+  namespace: deekayen
   author: David Norman
   description: Simulate the access of AWS IAM users and roles performing various actions against any ARN.
   license: BSD
