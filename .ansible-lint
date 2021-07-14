@@ -1,11 +1,9 @@
 ---
 
+exclude_paths:
+- .cache/
+- .github/
+- .pre-commit-config.yaml
+
 warn_list:
   - '204'
-
-kinds:
-  - playbook: "**/examples/*.{yml,yaml}"
-  - tasks: "**/tasks/*.yml"
-  - vars: "**/{defaults,vars}/*.yml"
-  - meta: "**/meta/main.yml"
-  - yaml: "**/*.{yml,yaml}"
