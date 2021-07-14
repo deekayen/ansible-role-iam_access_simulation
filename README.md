@@ -1,7 +1,7 @@
 AWS IAM Access Simulation
 =========================
 
-![Super-Linter](https://github.com/deekayen/ansible-role-iam_access_simulation/workflows/Super-Linter/badge.svg)
+[![CI](https://github.com/deekayen/ansible-role-iam_access_simulation/actions/workflows/ci.yml/badge.svg)](https://github.com/deekayen/ansible-role-iam_access_simulation/actions/workflows/ci.yml)
 
 Simulate the access of IAM users and roles performing various IAM actions against any ARN. This tells you which users and roles have access to your S3 buckets or KMS keys when the auditors ask.
 
