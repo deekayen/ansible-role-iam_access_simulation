@@ -1,21 +1,21 @@
 ---
 
-- block:
-
-  - name: Set output string variable value as a list item.
-    set_fact:
-      output_msg:
-        - "Role {{ simulation_json.item.role_name }} {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') }} to {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalActionName') }} on {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalResourceName') }}"
-    tags:
-      - role
-
-  # https://adminswerk.de/multi-line-string-yaml-ansible-I/
-  # https://blog.crisp.se/2016/10/20/maxwenzin/how-to-append-to-lists-in-ansible
-  - name: Concatenate output lists.
-    set_fact:
-      output_paragraph: "{{ output_paragraph + output_msg }}"
-    when: simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') == "allowed"
-    tags:
-      - role
-
+- name: Set facts for role.
   when: simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') == "allowed"
+  block:
+
+    - name: Set output string variable value as a list item.
+      ansible.builtin.set_fact:
+        output_msg:
+          - "Role {{ simulation_json.item.role_name }} {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') }} to {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalActionName') }} on {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalResourceName') }}"
+      tags:
+        - role
+
+    # https://adminswerk.de/multi-line-string-yaml-ansible-I/
+    # https://blog.crisp.se/2016/10/20/maxwenzin/how-to-append-to-lists-in-ansible
+    - name: Concatenate output lists.
+      ansible.builtin.set_fact:
+        output_paragraph: "{{ output_paragraph + output_msg }}"
+      when: simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') == "allowed"
+      tags:
+        - role

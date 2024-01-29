@@ -6,4 +6,4 @@ exclude_paths:
 - .pre-commit-config.yaml
 
 warn_list:
-  - '204'
+  - name[template]

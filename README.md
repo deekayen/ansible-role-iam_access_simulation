@@ -74,7 +74,7 @@ Dependencies
 
 ```yaml
 collections:
-  - community.aws
+  - amazon.aws
   - community.general
 ```
 

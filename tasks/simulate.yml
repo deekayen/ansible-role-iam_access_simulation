@@ -1,52 +1,52 @@
 ---
 
-- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - user simulate {{ resource_item.action }}."
-  command: |
+- name: "User simulate - {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+  ansible.builtin.command: |
     aws iam simulate-principal-policy \
       --policy-source-arn {{ item.arn }} \
       --resource-arns {{ resource_item.resource }} \
       --action-names {{ resource_item.action }}
   loop: "{{ user_info_result.iam_users }}"
-  changed_when: False
+  changed_when: false
   register: user_simulation_result
   tags:
     - user
 
-- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - print {{ resource_item.action }} simulation outcome."
-  debug:
+- name: "Print simulation outcome {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+  ansible.builtin.debug:
     var: user_simulation_result
     verbosity: 2
   tags:
     - user
 
 - name: Loop through results to make an output paragraph.
-  include_tasks: "{{ role_path }}/tasks/set_user_facts.yml"
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/set_user_facts.yml"
   loop: "{{ user_simulation_result.results }}"
   loop_control:
     loop_var: simulation_json
   tags:
     - user
 
-- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - role simulate {{ resource_item.action }}."
-  command: |
+- name: "Role simulate - {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+  ansible.builtin.command: |
     aws iam simulate-principal-policy \
       --policy-source-arn {{ item.arn }} \
       --resource-arns {{ resource_item.resource }} \
       --action-names {{ resource_item.action }}
   loop: "{{ role_info_result.iam_roles }}"
-  changed_when: False
+  changed_when: false
   register: role_simulation_result
   tags:
     - role
 
-- name: "{{ resource_item.resource | regex_search(':(.*?)$') }} - print {{ resource_item.action }} simulation outcome."
-  debug:
+- name: "Print simulation outcome {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+  ansible.builtin.debug:
     var: role_simulation_result
   tags:
     - role
 
 - name: Loop through results to make an output paragraph.
-  include_tasks: "{{ role_path }}/tasks/set_role_facts.yml"
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/set_role_facts.yml"
   loop: "{{ role_simulation_result.results }}"
   loop_control:
     loop_var: simulation_json
