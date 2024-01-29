@@ -1,6 +1,6 @@
 ---
 
-- name: "User simulate - {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+- name: "User simulate - {{ (resource_item.resource | regex_search(':(.*?)$')) + ' ' + resource_item.action }}"
   ansible.builtin.command: |
     aws iam simulate-principal-policy \
       --policy-source-arn {{ item.arn }} \
@@ -12,7 +12,7 @@
   tags:
     - user
 
-- name: "Print simulation outcome {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+- name: "Print simulation outcome {{ (resource_item.resource | regex_search(':(.*?)$')) + ' ' + resource_item.action }}"
   ansible.builtin.debug:
     var: user_simulation_result
     verbosity: 2
@@ -27,7 +27,7 @@
   tags:
     - user
 
-- name: "Role simulate - {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+- name: "Role simulate - {{ (resource_item.resource | regex_search(':(.*?)$')) + ' ' + resource_item.action }}"
   ansible.builtin.command: |
     aws iam simulate-principal-policy \
       --policy-source-arn {{ item.arn }} \
@@ -39,7 +39,7 @@
   tags:
     - role
 
-- name: "Print simulation outcome {{ resource_item.resource | regex_search(':(.*?)$') }} {{ resource_item.action }}"
+- name: "Print simulation outcome {{ (resource_item.resource | regex_search(':(.*?)$')) + ' ' + resource_item.action }}"
   ansible.builtin.debug:
     var: role_simulation_result
   tags:
