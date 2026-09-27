@@ -1,15 +1,14 @@
 ---
-
 galaxy_info:
-  role_name: iam_access_simulation
   namespace: deekayen
+  role_name: iam_access_simulation
   author: David Norman
   description: Simulate the access of AWS IAM users and roles performing various actions against any ARN.
-  license: BSD
-  min_ansible_version: '2.13'
-
   github_branch: main
   issue_tracker_url: https://github.com/deekayen/ansible-role-iam_access_simulation/issues
+
+  license: BSD-3-Clause
+  min_ansible_version: "2.15"
 
   platforms:
     - name: GenericLinux
@@ -19,9 +18,5 @@ galaxy_info:
   galaxy_tags:
     - aws
     - iam
-
-collections:
-  - amazon.aws
-  - community.general
 
 dependencies: []

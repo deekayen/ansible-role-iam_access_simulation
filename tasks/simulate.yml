@@ -1,11 +1,16 @@
 ---
-
 - name: "User simulate - {{ (resource_item.resource | regex_search(':(.*?)$')) + ' ' + resource_item.action }}"
-  ansible.builtin.command: |
-    aws iam simulate-principal-policy \
-      --policy-source-arn {{ item.arn }} \
-      --resource-arns {{ resource_item.resource }} \
-      --action-names {{ resource_item.action }}
+  ansible.builtin.command:
+    argv:
+      - aws
+      - iam
+      - simulate-principal-policy
+      - --policy-source-arn
+      - "{{ item.arn }}"
+      - --resource-arns
+      - "{{ resource_item.resource }}"
+      - --action-names
+      - "{{ resource_item.action }}"
   loop: "{{ user_info_result.iam_users }}"
   changed_when: false
   register: user_simulation_result
@@ -20,7 +25,7 @@
     - user
 
 - name: Loop through results to make an output paragraph.
-  ansible.builtin.include_tasks: "{{ role_path }}/tasks/set_user_facts.yml"
+  ansible.builtin.include_tasks: set_user_facts.yml
   loop: "{{ user_simulation_result.results }}"
   loop_control:
     loop_var: simulation_json
@@ -28,11 +33,17 @@
     - user
 
 - name: "Role simulate - {{ (resource_item.resource | regex_search(':(.*?)$')) + ' ' + resource_item.action }}"
-  ansible.builtin.command: |
-    aws iam simulate-principal-policy \
-      --policy-source-arn {{ item.arn }} \
-      --resource-arns {{ resource_item.resource }} \
-      --action-names {{ resource_item.action }}
+  ansible.builtin.command:
+    argv:
+      - aws
+      - iam
+      - simulate-principal-policy
+      - --policy-source-arn
+      - "{{ item.arn }}"
+      - --resource-arns
+      - "{{ resource_item.resource }}"
+      - --action-names
+      - "{{ resource_item.action }}"
   loop: "{{ role_info_result.iam_roles }}"
   changed_when: false
   register: role_simulation_result
@@ -46,7 +57,7 @@
     - role
 
 - name: Loop through results to make an output paragraph.
-  ansible.builtin.include_tasks: "{{ role_path }}/tasks/set_role_facts.yml"
+  ansible.builtin.include_tasks: set_role_facts.yml
   loop: "{{ role_simulation_result.results }}"
   loop_control:
     loop_var: simulation_json

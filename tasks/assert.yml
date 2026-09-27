@@ -1,0 +1,11 @@
+---
+- name: Assert every resource to test has an ARN and an IAM action.
+  ansible.builtin.assert:
+    that:
+      - item.resource is defined and item.resource is match('^arn:')
+      - item.action is defined and item.action is match('^[A-Za-z0-9-]+:[A-Za-z0-9*]+$')
+    fail_msg: >-
+      Each resources_to_test entry needs a resource ARN and an action like
+      s3:GetObject, got: {{ item }}
+    quiet: true
+  loop: "{{ resources_to_test }}"

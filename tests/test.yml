@@ -1,0 +1,12 @@
+---
+- name: Apply the iam_access_simulation role for a syntax check.
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  roles:
+    - role: deekayen.iam_access_simulation
+      vars:
+        resources_to_test:
+          - action: s3:GetObject
+            resource: arn:aws:s3:::example-bucket

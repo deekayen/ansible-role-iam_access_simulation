@@ -31,7 +31,7 @@ Example Playbook
 
 - hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: false
 
   vars:
     resources_to_test:
@@ -47,7 +47,7 @@ Example Playbook
 The results of the simulation are printed to the console at the end of the playbook run.
 
 ```shell
-TASK [iam_access_simulation : Print similation results.] **********************
+TASK [iam_access_simulation : Print simulation results.] **********************
 ok: [localhost] => {
     "msg": [
         "User deekayen allowed to s3:GetObject on arn:aws:s3:::deekayen-123456789000-secret-bucket",

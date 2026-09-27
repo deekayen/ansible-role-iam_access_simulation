@@ -1,12 +1,11 @@
 ---
-
 - name: Set facts for role.
   when: simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') == "allowed"
   block:
 
     - name: Set output string variable value as a list item.
       ansible.builtin.set_fact:
-        output_msg:
+        iam_access_simulation_line:
           - >-
             Role {{ simulation_json.item.role_name }}
             {{ simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') }}
@@ -19,7 +18,7 @@
     # https://blog.crisp.se/2016/10/20/maxwenzin/how-to-append-to-lists-in-ansible
     - name: Concatenate output lists.
       ansible.builtin.set_fact:
-        output_paragraph: "{{ output_paragraph + output_msg }}"
+        iam_access_simulation_output: "{{ iam_access_simulation_output + iam_access_simulation_line }}"
       when: simulation_json.stdout | from_json | community.general.json_query('EvaluationResults[0].EvalDecision') == "allowed"
       tags:
         - role

@@ -8,3 +8,5 @@
 ehthumbs.db
 Thumbs.db
 .vault
+.ansible/
+__pycache__/

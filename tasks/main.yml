@@ -1,4 +1,8 @@
 ---
+- name: Validate role variables.
+  ansible.builtin.import_tasks: assert.yml
+  tags:
+    - always
 
 - name: List all IAM users.
   amazon.aws.iam_user_info:
@@ -27,15 +31,15 @@
     - role
 
 - name: Loop through resources to simulate user access.
-  ansible.builtin.include_tasks: "{{ role_path }}/tasks/simulate.yml"
+  ansible.builtin.include_tasks: simulate.yml
   loop: "{{ resources_to_test }}"
   loop_control:
     loop_var: resource_item
   tags:
     - always
 
-- name: Print similation results.
+- name: Print simulation results.
   ansible.builtin.debug:
-    msg: "{{ output_paragraph | trim }}"
+    msg: "{{ iam_access_simulation_output | trim }}"
   tags:
     - always

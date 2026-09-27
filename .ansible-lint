@@ -1,6 +1,5 @@
 ---
-
 exclude_paths:
-- .cache/
-- .github/
-- .pre-commit-config.yaml
+  - .cache/
+  - .github/
+  - .pre-commit-config.yaml

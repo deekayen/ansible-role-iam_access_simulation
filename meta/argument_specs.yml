@@ -1,0 +1,25 @@
+---
+argument_specs:
+  main:
+    short_description: Simulate IAM users' and roles' access to resources.
+    description:
+      - Lists every IAM user and role in the account and runs
+        aws iam simulate-principal-policy for each resource and action,
+        printing the principals that are allowed.
+    author:
+      - David Norman
+    options:
+      resources_to_test:
+        type: list
+        elements: dict
+        default: []
+        description: Resources and IAM actions to simulate.
+        options:
+          resource:
+            type: str
+            required: true
+            description: Resource ARN to test.
+          action:
+            type: str
+            required: true
+            description: IAM action to test, such as s3:GetObject.
